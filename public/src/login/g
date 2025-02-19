@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartShop Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Spirax&family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="./public/css/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-1/5 bg-gray-300 p-5 flex flex-col gap-4">
+            <h1 class="text-2xl font-bold flex items-center gap-2">
+                <span class="text-4xl">§</span> SmartShop
+            </h1>
+            <nav class="flex flex-col gap-4">
+                <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-400 rounded"><span>🏠</span> Dashboard</a>
+                <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-400 rounded"><span>👤</span> AddUser</a>
+                <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-400 rounded"><span>📋</span> DataProduk</a>
+                <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-400 rounded"><span>💰</span> Transaksi</a>
+                <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-400 rounded"><span>📦</span> Stok</a>
+                <a href="#" class="flex items-center gap-2 p-2 hover:bg-gray-400 rounded"><span>🚪</span> Logout</a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="w-4/5 p-5">
+            <div class="grid grid-cols-5 gap-4">
+                <div class="bg-green-500 text-white p-4 rounded">Rp. 1.000.000 Keuntungan</div>
+                <div class="bg-green-500 text-white p-4 rounded">Rp. 3.000.000 Penjualan</div>
+                <div class="bg-green-500 text-white p-4 rounded">20 Produk</div>
+                <div class="bg-green-500 text-white p-4 rounded">20 Produk Masuk</div>
+                <div class="bg-green-500 text-white p-4 rounded">30 Pembeli Produk</div>
+            </div>
+            
+            <!-- Grafik -->
+            <div class="grid grid-cols-2 gap-4 mt-5">
+                <div class="bg-gray-200 p-5 rounded">
+                    <h2 class="text-lg font-bold mb-3">Produk Terlaris</h2>
+                    <div class="bg-green-500 h-6 w-3/4 mb-2"></div>
+                    <div class="bg-green-500 h-6 w-2/3 mb-2"></div>
+                    <div class="bg-green-500 h-6 w-1/2 mb-2"></div>
+                    <div class="bg-green-500 h-6 w-1/3 mb-2"></div>
+                    <div class="bg-green-500 h-6 w-1/4 mb-2"></div>
+                </div>
+                <div class="bg-gray-200 p-5 rounded">
+                    <h2 class="text-lg font-bold mb-3">Jumlah Penjualan</h2>
+                    <div class="grid grid-cols-6 gap-2">
+                        <div class="bg-green-500 h-40 w-6"></div>
+                        <div class="bg-green-500 h-28 w-6"></div>
+                        <div class="bg-green-500 h-36 w-6"></div>
+                        <div class="bg-green-500 h-48 w-6"></div>
+                        <div class="bg-green-500 h-32 w-6"></div>
+                        <div class="bg-green-500 h-38 w-6"></div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <span>M</span><span>S</span><span>S</span><span>R</span><span>K</span><span>J</span><span>S</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

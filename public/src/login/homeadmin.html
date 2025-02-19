@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smartshop Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Spirax&family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+  <link href="./public/css/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-r from-red-50 to-blue-100 font-sans">
+
+  <header class="bg-gradient-to-r from-yellow-400 to-yellow-600 py-4 shadow-md">
+    <div class="container mx-auto flex items-center justify-between px-4">
+      <div class="flex items-center space-x-3">
+        <img src="./image/logo-putih.png" alt="Smartshop Logo" class="w-12 h-12 object-contain">
+        <span class="text-white font-bold text-2xl">Smartshop</span>
+      </div>
+      <nav class="hidden md:flex space-x-6">
+        <a href="./user/datauser.php" class="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 transition duration-300">
+          ➕ Add User
+        </a>
+        <a href="./produk/dataproduk.php" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
+          📋 Data Product
+        </a>
+        <a href="./tarnsaksi/transaksi.php" class="bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-orange-600 transition duration-300">
+          🛒 Transaction
+        </a>
+        <a href="./stok/stok.php" class="bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600 transition duration-300">
+          📦 Stock
+        </a>
+        <button onclick="logout()" class="
+        block py-2 px-4 bg-white font-semibold rounded hover:bg-white">
+          Logout
+        </button>
+      </nav>
+      <div class="md:hidden">
+        <button id="menuToggle" class="text-white text-3xl focus:outline-none">&#9776;</button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="hidden flex-col items-center bg-yellow-500 text-white py-4 space-y-2 md:hidden">
+      <a href="./user/datauser.php" class="block py-2 px-4 hover:bg-yellow-600">➕ Add User</a>
+      <a href="./produk/dataproduk.php" class="block py-2 px-4 hover:bg-yellow-600">📋 Data Product</a>
+      <a href="./tarnsaksi/transaksi.php" class="block py-2 px-4 hover:bg-yellow-600">🛒 Transaction</a>
+      <a href="./stok/stok.php" class="block py-2 px-4 hover:bg-yellow-600">📦 Stock</a>
+      <button onclick="logout()" class="block py-2 px-4 hover:bg-yellow-600">Logout</button>
+    </div>
+  </header>
+
+  <main class="flex flex-col justify-center items-center h-96 text-center">
+    <div class="bg-white p-10 shadow-lg rounded-lg">
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">
+        Halo! <span class="text-yellow-500">Smartshop</span> siap membantu Anda
+      </h1>
+      <p class="text-gray-600 text-lg">
+        Mengelola tugas harian dengan efisien dan mudah.
+      </p>
+    </div>
+  </main>
+
+  <main class="flex flex-col items-center py-10">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">Laporan Transaksi</h2>
+        <p class="text-gray-600">Ringkasan laporan transaksi terbaru:</p>
+        <ul class="mt-4">
+          <li class="flex justify-between">
+            <span class="text-gray-800">Total Transaksi:</span>
+            <span class="font-semibold text-gray-900">Rp 15.000.000</span>
+          </li>
+          <li class="flex justify-between mt-2">
+            <span class="text-gray-800">Transaksi Hari Ini:</span>
+            <span class="font-semibold text-gray-900">5 Transaksi</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">History Transaksi</h2>
+        <table class="min-w-full bg-white">
+          <thead>
+            <tr>
+              <th class="py-2 px-4 text-left text-sm font-semibold text-gray-700">No</th>
+              <th class="py-2 px-4 text-left text-sm font-semibold text-gray-700">Tanggal</th>
+              <th class="py-2 px-4 text-left text-sm font-semibold text-gray-700">Jumlah</th>
+              <th class="py-2 px-4 text-left text-sm font-semibold text-gray-700">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-2 px-4 text-gray-600">1</td>
+              <td class="py-2 px-4 text-gray-600">2025-01-26</td>
+              <td class="py-2 px-4 text-gray-600">Rp 2.500.000</td>
+              <td class="py-2 px-4 text-gray-600">Selesai</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 text-gray-600">2</td>
+              <td class="py-2 px-4 text-gray-600">2025-01-25</td>
+              <td class="py-2 px-4 text-gray-600">Rp 1.000.000</td>
+              <td class="py-2 px-4 text-gray-600">Selesai</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">Laporan Barang Terjual</h2>
+        <p class="text-gray-600">Ringkasan barang yang terjual hari ini:</p>
+        <ul class="mt-4">
+          <li class="flex justify-between">
+            <span class="text-gray-800">Total Barang Terjual:</span>
+            <span class="font-semibold text-gray-900">50 Barang</span>
+          </li>
+          <li class="flex justify-between mt-2">
+            <span class="text-gray-800">Barang Terlaris:</span>
+            <span class="font-semibold text-gray-900">Produk A</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    function logout() {
+      const confirmLogout = confirm('Apakah Anda yakin ingin logout?');
+      if (confirmLogout) {
+        window.location.href = 'index.html'; 
+      }
+    }
+  </script>
+
+</body>
+
+</html>
