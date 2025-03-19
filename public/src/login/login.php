@@ -1,44 +1,51 @@
 <?php
-header( "Content-Type: application/json" );
+session_start();
+include 'config.php';
 
-$servername = "localhost";
-$username_db = "root";
-$password_db = "";
-$dbname = "kasir_ukk_widia";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = isset($_POST['username']) ? trim($_POST['username']) : null;
+    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
 
-$conn = new mysqli($servername, $username_db, $password_db, $dbname);
+    if (empty($username) || empty($password)) {
+        $_SESSION['error'] = "Username atau password tidak boleh kosong!";
+        header("Location: index.php");
+        exit();
+    }
 
-if ($conn->connect_error) {
-    die( json_encode(['status' => 'error', 'message' => 'Koneksi ke database gagal!']));
-}
+    $sql = $conn->prepare("SELECT * FROM pengguna WHERE username = ?");
+    $sql->bind_param("s", $username);
+    $sql->execute();
+    $result = $sql->get_result();
 
-$username = isset($_POST['username']) ? trim($_POST['username']) : null;
-$password = isset($_POST['password']) ? trim($_POST['password']) : null;
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        if (password_verify($password, $row['password'])) {
+            $_SESSION['idpengguna'] = $row['idpengguna'];
+            $_SESSION['nama'] = $row['nama'];
+            $_SESSION['username'] = $username;
+            $_SESSION['level'] = $row['level'];
 
-if (empty($username) || empty($password)) {
-    echo json_encode(['status' => 'error', 'message' => 'Username atau password tidak boleh kosong!']);
+            if ($row['level'] === 'admin') {
+                header("Location: homeadmin.php");
+            } elseif ($row['level'] === 'petugas') {
+                header("Location: homepetugas.php");
+            } else {
+                $_SESSION['error'] = "Level tidak dikenali.";
+                header("Location: index.php");
+            }
+        } else {
+            $_SESSION['error'] = "Password salah!";      
+            header("Location: index.php");
+        }
+    } else {
+        $_SESSION['error'] = "Username tidak ditemukan!";
+        header("Location: index.php");
+    }
+
+    $conn->close();
+} else {
+    header("Location: index.php");
     exit();
 }
-
-$sql = $conn->prepare( "SELECT * FROM user WHERE username = ?" );
-$sql->bind_param("s", $username);
-$sql->execute();
-$result = $sql->get_result();
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    if ($password === $row['password']) { 
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Anda berhasil login!',
-            'level' => $row['level'] 
-        ]);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Password salah!']);
-    }
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'Username tidak ditemukan!']);
-}
-
-$conn->close();
 ?>

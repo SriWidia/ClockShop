@@ -8,12 +8,12 @@ if ($conn->connect_error) {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM pengguna WHERE idpengguna = ?";
+    $sql = "DELETE FROM stok WHERE idstok = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
 
-    header("Location: datauser.php?status=deleted"); 
+    header("Location: datastok.php?status=deleted"); 
 }
 
 $conn->close();
