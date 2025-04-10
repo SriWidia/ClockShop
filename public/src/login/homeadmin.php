@@ -17,15 +17,26 @@ $query_produk = "SELECT
                      WHERE DATE(pj.tanggal_penjualan) = CURDATE() 
                      GROUP BY p.idproduk 
                      ORDER BY SUM(d.jumlah_produk) DESC 
-                     LIMIT 1) AS produk_laris"; 
+                     LIMIT 1) AS produk_laris, 
+                    (SELECT SUM(d.jumlah_produk) 
+                     FROM detail_penjualan d
+                     JOIN penjualan pj ON d.idpenjualan = pj.idpenjualan
+                     WHERE DATE(pj.tanggal_penjualan) = CURDATE()) AS produk_terjual";
 
 $result_produk = $conn->query($query_produk);
 $produk = $result_produk->fetch_assoc();
 
 $produk_laris = $produk['produk_laris'] ? $produk['produk_laris'] : "Belum ada transaksi hari ini";
+$produk_terjual = $produk['produk_terjual'] ? $produk['produk_terjual'] : "Belum ada transaksi hari ini";
+
+$query_pendapatan = "SELECT IFNULL(SUM(total_bayar), 0) AS pendapatan_hari_ini FROM penjualan WHERE DATE(tanggal_penjualan) = CURDATE()";
+$result_pendapatan = $conn->query($query_pendapatan);
+$row_pendapatan = $result_pendapatan->fetch_assoc();
+$pendapatan_hari_ini = $row_pendapatan['pendapatan_hari_ini'];
 
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -104,13 +115,19 @@ $conn->close();
         </div>
         <h2 class="text-xl font-semibold text-gray-700">Informasi Produk</h2>
       </div>
-      <p class="text-gray-500 mt-4">Informasi tentang produk dan jumlahnya.</p>
       <ul class="mt-4 space-y-2 text-gray-500">
-        <li><strong>Jumlah Produk:</strong> <?php echo $produk['jumlah_produk']; ?> Produk</li>
         <li><strong>Produk Paling Laris:</strong> <?php echo $produk['produk_laris'] ?: "Belum ada transaksi hari ini"; ?></li>
+        <li><strong>Produk Terjual:</strong> <?php echo $produk['produk_terjual'] ?: "Belum ada transaksi hari ini"; ?></li>
+        <li><strong>Pendapatan Hari Ini:</strong> 
+        <?php 
+          echo $row_pendapatan['pendapatan_hari_ini'] 
+            ? 'Rp. ' . number_format($row_pendapatan['pendapatan_hari_ini'], 0, ',', '.') 
+            : 'Belum ada transaksi hari ini'; 
+        ?>
+      </li>
       </ul>
     </div>
-
+    
       <div class="bg-white shadow-xl rounded-2xl p-6 transition duration-300 hover:bg-gray-50 hover:shadow-2xl hover:scale-105">
         <div class="flex items-center space-x-4">
           <div class="bg-red-100 p-3 rounded-full">
