@@ -43,7 +43,7 @@ $result_detail = $conn->query($sql_detail);
 <body class="flex items-center justify-center min-h-screen bg-gray-100" onload="window.print()">
 
 <div class="bg-white shadow-lg rounded-lg p-6 max-w-sm text-center">
-    <img src="kcs.png" alt="Logo Toko" class="w-25 mx-auto mb-2">
+    <img src="1.png" alt="Logo Toko" class="w-25 mx-auto mb-2">
     <p class="text-sm">Jln. PagarBetis, Sumedang</p>
     <hr class="my-2 border-dashed border-gray-400">
     <p class="text-sm font-semibold">

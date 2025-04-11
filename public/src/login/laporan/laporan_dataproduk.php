@@ -5,8 +5,7 @@ $sql = "SELECT
             idproduk,
             nama_produk,
             harga_jual,
-            harga_beli,
-            stok
+            harga_beli
         FROM produk";
 
 $result = mysqli_query($conn, $sql);
@@ -39,7 +38,6 @@ $result = mysqli_query($conn, $sql);
                     <th class="px-6 py-3 text-left">Nama Produk</th>
                     <th class="px-6 py-3 text-left">Harga Jual</th>
                     <th class="px-6 py-3 text-left">Harga Beli</th>
-                    <th class="px-6 py-3 text-left">Stok</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,7 +48,6 @@ $result = mysqli_query($conn, $sql);
                             <td class="px-6 py-4"><?= $row['nama_produk']; ?></td>
                             <td class="px-6 py-4"><?= number_format($row['harga_jual'], 0, ',', '.'); ?></td>
                             <td class="px-6 py-4"><?= number_format($row['harga_beli'], 0, ',', '.'); ?></td>
-                            <td class="px-6 py-4"><?= $row['stok']; ?></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else : ?>
@@ -74,10 +71,10 @@ $result = mysqli_query($conn, $sql);
 
     html2canvas(document.getElementById("laporan"), { scale: 2 }).then(canvas => {
         let { jsPDF } = window.jspdf;
-        let pdf = new jsPDF('l', 'mm', 'a4'); 
+        let pdf = new jsPDF('p', 'mm', 'a4'); // Ganti 'l' dengan 'p' untuk potret
 
-        let pageWidth = 297; 
-        let pageHeight = 210;
+        let pageWidth = 210; // Lebar halaman A4 dalam mm (210mm untuk potret)
+        let pageHeight = 297; // Tinggi halaman A4 dalam mm (297mm untuk potret)
         let margin = 10;
         let imgWidth = pageWidth - 2 * margin; 
         let imgHeight = (canvas.height * imgWidth) / canvas.width; 
@@ -117,6 +114,7 @@ $result = mysqli_query($conn, $sql);
         pdf.save("Laporan_Produk.pdf");
     });
 }
+
 
     function goBack() {
         window.history.back();

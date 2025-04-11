@@ -113,7 +113,7 @@ $conn->close();
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18v18H3V3zM3 9h18M9 3v18"></path>
           </svg>
         </div>
-        <h2 class="text-xl font-semibold text-gray-700">Informasi Produk</h2>
+        <h2 class="text-xl font-semibold text-gray-700">Informasi Penjualan Hari Ini</h2>
       </div>
       <ul class="mt-4 space-y-2 text-gray-500">
         <li><strong>Produk Paling Laris:</strong> <?php echo $produk['produk_laris'] ?: "Belum ada transaksi hari ini"; ?></li>
