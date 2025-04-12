@@ -49,7 +49,7 @@ $total = mysqli_fetch_assoc($result_total);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Penjualan</title>
+    <title>Laporan Laba Rugi</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -62,8 +62,6 @@ $total = mysqli_fetch_assoc($result_total);
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
             </button>
-            <h2 class="text-2xl font-bold text-center text-gray-700">Laporan Penjualan</h2>
-            <div></div>
         </div>
 
         <form method="GET" class="mb-4 text-center">
