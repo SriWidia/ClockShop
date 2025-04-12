@@ -28,7 +28,7 @@ if (!isset($_SESSION['idpengguna'])) {
       </svg>
     </button>
     
-    <div class="flex items-center space-x-3">
+    <div class="flex items-center spa ce-x-3">
       <div>
         <p class="font-bold text-xl tracking-wide">ClockShop</p>
         <p class="text-sm hidden sm:block opacity-90 italic">Aplikasi Pengelolaan Kasir Toko</p>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['idpengguna'])) {
         </thead>
         <tbody id="PenjualanList">
             <?php
-            $sql = "SELECT * FROM penjualan";
+            $sql = "SELECT * FROM penjualan ORDER BY tanggal_penjualan DESC, idpenjualan DESC";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -73,7 +73,7 @@ if (!isset($_SESSION['idpengguna'])) {
                   <td class='border p-2 text-center'>{$row['tanggal_penjualan']}</td>
                   <td class='border p-2 text-center'>Rp " . number_format($row['total_harga'], 0, ',', '.') . "</td>
                   <td class='border p-2 text-center'>
-                      <a href='detail_penjualan.php?id={$row['idpenjualan']}' class='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-700'>Detail</a>";
+                      <a href='detail_penjualan.php?id={$row['idpenjualan']}' class='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-700 mr-2'>Detail</a>";
                   if ($_SESSION['level'] != 'petugas') {
                   echo "<a href='delete_penjualan.php?id={$row['idpenjualan']}' class='bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-700'>Batalkan</a>";
                   }echo "</td></tr>";

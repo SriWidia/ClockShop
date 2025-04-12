@@ -22,10 +22,17 @@ if ($result->num_rows > 0) {
     exit;
 }
 
-$sql_detail = "SELECT dp.idproduk, pr.nama_produk, dp.jumlah_produk, pr.harga_jual, dp.subtotal 
+$sql_detail = "SELECT 
+                dp.idproduk, 
+                pr.nama_produk, 
+                SUM(dp.jumlah_produk) AS jumlah_produk, 
+                pr.harga_jual, 
+                SUM(dp.subtotal) AS subtotal 
                FROM detail_penjualan dp 
                JOIN produk pr ON dp.idproduk = pr.idproduk
-               WHERE dp.idpenjualan = '$idpenjualan'";
+               WHERE dp.idpenjualan = '$idpenjualan'
+               GROUP BY dp.idproduk, pr.nama_produk, pr.harga_jual";
+
 $result_detail = $conn->query($sql_detail);
 ?>
 

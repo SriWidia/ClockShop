@@ -22,10 +22,17 @@ if (!$penjualan) {
     die("Data penjualan tidak ditemukan.");
 }
 
-$sql_detail = "SELECT dp.idproduk, pr.nama_produk, dp.jumlah_produk, pr.harga_jual, dp.subtotal 
-               FROM detail_penjualan dp 
-               JOIN produk pr ON dp.idproduk = pr.idproduk
-               WHERE dp.idpenjualan = ?";
+$sql_detail = "SELECT 
+                dp.idproduk, 
+                pr.nama_produk, 
+                SUM(dp.jumlah_produk) AS jumlah_produk, 
+                pr.harga_jual, 
+                SUM(dp.subtotal) AS subtotal 
+            FROM detail_penjualan dp 
+            JOIN produk pr ON dp.idproduk = pr.idproduk
+            WHERE dp.idpenjualan = ?
+            GROUP BY dp.idproduk, pr.nama_produk, pr.harga_jual";
+
 $stmt_detail = $conn->prepare($sql_detail);
 $stmt_detail->bind_param("s", $idpenjualan);
 $stmt_detail->execute();

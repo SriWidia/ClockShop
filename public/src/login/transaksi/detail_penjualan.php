@@ -24,10 +24,16 @@ if (!$penjualan) {
 }
 
 // Query untuk mengambil detail penjualan
-$sql_detail = "SELECT dp.idproduk, pr.nama_produk, dp.jumlah_produk, pr.harga_jual, dp.subtotal 
+$sql_detail = "SELECT 
+                    dp.idproduk, 
+                    pr.nama_produk, 
+                    SUM(dp.jumlah_produk) AS jumlah_produk, 
+                    pr.harga_jual, 
+                    SUM(dp.subtotal) AS subtotal 
                FROM detail_penjualan dp 
                JOIN produk pr ON dp.idproduk = pr.idproduk
-               WHERE dp.idpenjualan = ?";
+               WHERE dp.idpenjualan = ?
+               GROUP BY dp.idproduk, pr.nama_produk, pr.harga_jual";
 $stmt_detail = $conn->prepare($sql_detail);
 $stmt_detail->bind_param("s", $idpenjualan);
 $stmt_detail->execute();

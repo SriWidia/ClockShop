@@ -15,7 +15,7 @@ if (!isset($_SESSION['idpengguna'])) {
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
   <link href="./css/output.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <title>Tampilan Transaksi</title>
+  <title>Transaksi</title>
 </head>
 <body class="bg-gray-200">
 <header class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-600 to-indigo-500 text-white shadow-lg">
@@ -41,12 +41,15 @@ if (!isset($_SESSION['idpengguna'])) {
     </div>
   </div>
 </header>
-  <div class="flex space-x-3 mt-3">
-    <button id="btnPelanggan" class="bg-blue-500 text-white px-4 py-2 rounded">Buat Member Pelanggan</button>
-  </div>
-  
-  <div class="container mx-auto grid grid-cols-3 gap-4">
-    <div class="bg-white p-6 shadow-lg rounded-lg border border-gray-200">
+<div class="mt-3 mx-4">
+  <button id="btnPelanggan"
+     class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold transition duration-200">
+    Buat Member Pelanggan
+  </button>
+</div>
+
+<div class="container mx-4 mt-6 grid grid-cols-3 gap-4">
+  <div class="bg-white p-6 shadow-lg rounded-lg border border-gray-200">
         <h2 class="font-semibold text-xl text-gray-700 mb-5">Input Transaksi</h2>
         <input type="date" id="tanggalTransaksi" name="tanggalTransaksi"
        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -60,30 +63,30 @@ if (!isset($_SESSION['idpengguna'])) {
             </div>
 
             <div>
-            <label class="block text-gray-600 font-medium">ID Pelanggan:</label>
-            <input type="text" id="idpelanggan" name="idpelanggan"
-                class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Cari ID Pelanggan..." onkeyup="cariPelanggan()" oninput="updateRingkasan()">
+    <label for="idpelanggan" class="block text-gray-600 font-medium">ID Pelanggan:</label>
+    <input type="text" id="idpelanggan" name="idpelanggan"
+        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="Cari ID Pelanggan..." onkeyup="cariPelanggan()" oninput="updateRingkasan()">
 
-            <div class="relative">
-                <ul id="listPelanggan" class="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto hidden">
-                    <?php
-                    include 'config.php';
-                    $query = "SELECT idpelanggan, nama_pelanggan FROM pelanggan";
-                    $result = mysqli_query($conn, $query);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<li class='p-2 hover:bg-blue-100 cursor-pointer' 
-                                onclick='pilihPelanggan(\"{$row['idpelanggan']}\", \"{$row['nama_pelanggan']}\")'>
-                                {$row['idpelanggan']} - {$row['nama_pelanggan']}
-                            </li>";
-                    }
-                    ?>
-                </ul>
-            </div>
-        </div>
+    <div class="relative">
+        <ul id="listPelanggan" class="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto hidden">
+            <?php
+            include 'config.php';
+            $query = "SELECT idpelanggan, nama_pelanggan FROM pelanggan";
+            $result = mysqli_query($conn, $query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<li class='p-2 hover:bg-blue-100 cursor-pointer' 
+                        onclick='pilihPelanggan(\"{$row['idpelanggan']}\", \"{$row['nama_pelanggan']}\")'>
+                        {$row['idpelanggan']} - {$row['nama_pelanggan']}
+                    </li>";
+            }
+            ?>
+        </ul>
+    </div>
+</div>
 
 <div>
-    <label class="block text-gray-600 font-medium">Nama Pelanggan</label>
+    <label for="nama_pelanggan" class="block text-gray-600 font-medium">Nama Pelanggan:</label>
     <input type="text" id="nama_pelanggan"
            class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 shadow-sm focus:outline-none" readonly>
 </div>
@@ -247,60 +250,39 @@ function generateIdPenjualan() {
     document.getElementById("idPenjualanText").innerText = idPenjualan;
     document.getElementById("inputIdPenjualan").value = idPenjualan;
 }
-
-
 function cariPelanggan() {
-    let input = document.getElementById("idpelanggan").value.toLowerCase();
-    let list = document.getElementById("listPelanggan");
+    let input = document.getElementById("idpelanggan").value.toLowerCase(); 
+    let list = document.getElementById("listPelanggan"); 
     let items = list.getElementsByTagName("li");
 
-        if (input === "") {
-            list.classList.add("hidden");
-            return;
-        }
+    if (input === "") {
+        list.classList.add("hidden");
+        return;
+    }
 
-            list.classList.remove("hidden");
-
-    let hasResult = false;
-        for (let i = 0; i < items.length; i++) {
-    let text = items[i].innerText.toLowerCase();
+    list.classList.remove("hidden"); 
+    let hasResult = false; 
+    for (let i = 0; i < items.length; i++) {
+        let text = items[i].innerText.toLowerCase();
         if (text.includes(input)) {
-            items[i].style.display = "block";
+            items[i].style.display = "block"; 
             hasResult = true;
         } else {
             items[i].style.display = "none";
         }
-        }
+    }
 
-        if (!hasResult) {
-            list.classList.add("hidden");
-        }
-        }
+    if (!hasResult) {
+        list.classList.add("hidden");
+    }
+}
 
 function pilihPelanggan(id, nama) {
     document.getElementById("idpelanggan").value = id;
     document.getElementById("nama_pelanggan").value = nama;
-    document.getElementById("idRingkasanPelanggan").innerText = id; 
-    document.getElementById("namaRingkasanPelanggan").innerText = nama;
 
-    let list = document.getElementById("listPelanggan");
-    list.classList.add("hidden");
-
-    setTimeout(() => {
-        list.style.display = "none";
-    }, 300);
+    document.getElementById("listPelanggan").classList.add("hidden");
 }
-
-function pilihPelanggan(id, nama) {
-    document.getElementById('idpelanggan').value = id;
-    document.getElementById('nama_pelanggan').value = nama;
-    document.querySelector('input[name="id_pelanggan"]').value = id;
-    document.getElementById('listPelanggan').classList.add('hidden');
-}
-
-    document.getElementById('idpelanggan').addEventListener('input', function() {
-    document.getElementById('idpelanggan_detail').value = this.value;
-    });
 
 function cariProduk() {
     let input = document.getElementById("searchProduk").value.toLowerCase();
@@ -390,15 +372,38 @@ document.getElementById("btnTambahProduk").addEventListener("click", function(ev
 
 function tambahKeTabel(idproduk, jumlah, subtotal, tanggal) {
     let table = document.getElementById("detailTransaksi").getElementsByTagName('tbody')[0];
-    let newRow = table.insertRow();
-    
-    newRow.innerHTML = `
-        <td class="border-b p-2">${idproduk}</td>
-        <td class="border-b p-2">${jumlah}</td>
-        <td class="border-b p-2">Rp ${subtotal}</td>
-        <td class="border-b p-2">${tanggal}</td>
-    `;
+    let rows = table.getElementsByTagName("tr");
+    let produkSudahAda = false;
+
+    for (let i = 0; i < rows.length; i++) {
+        let row = rows[i];
+        let cellIdProduk = row.cells[0].textContent;
+
+        if (cellIdProduk === idproduk) {
+            let jumlahLama = parseInt(row.cells[1].textContent);
+            let subtotalLama = parseInt(row.cells[2].textContent.replace(/\D/g, ''));
+
+            let jumlahBaru = jumlahLama + parseInt(jumlah);
+            let subtotalBaru = subtotalLama + parseInt(subtotal);
+
+            row.cells[1].textContent = jumlahBaru;
+            row.cells[2].textContent = `Rp ${subtotalBaru.toLocaleString('id-ID')}`;
+            produkSudahAda = true;
+            break;
+        }
+    }
+
+    if (!produkSudahAda) {
+        let newRow = table.insertRow();
+        newRow.innerHTML = `
+            <td class="border-b p-2">${idproduk}</td>
+            <td class="border-b p-2">${jumlah}</td>
+            <td class="border-b p-2">Rp ${parseInt(subtotal).toLocaleString('id-ID')}</td>
+            <td class="border-b p-2">${tanggal}</td>
+        `;
+    }
 }
+
 
 //tampilkan ringkasan
 function updateRingkasan() { 
