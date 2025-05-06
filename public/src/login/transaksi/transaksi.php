@@ -174,7 +174,6 @@ if (!isset($_SESSION['idpengguna'])) {
         </div>
     </form>
 </div>
-<div class="bg-white p-6 rounded-xl shadow-lg h-[16.5vh]"></div>
 <form id="formTransaksi" class="col-span-2">
     <div class="bg-white p-6 shadow-lg rounded-xl mt-6 w-full border border-gray-200">
         <h2 class="font-bold text-xl mb-4 text-gray-700">Ringkasan Transaksi</h2>
@@ -232,7 +231,8 @@ function goBack() {
     window.history.back();
 }
 
-//from Transaksi
+
+
 document.addEventListener("DOMContentLoaded", function () {
     generateIdPenjualan();
     document.getElementById("idpelanggan").addEventListener("change", hitungTotal);
@@ -323,7 +323,9 @@ function formatRupiah(input) {
         let formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); 
         input.value = 'Rp ' + formattedValue; 
     }
-//tambah produk
+    
+
+
 document.getElementById("btnTambahProduk").addEventListener("click", function(event) {
     event.preventDefault(); 
 
@@ -405,7 +407,8 @@ function tambahKeTabel(idproduk, jumlah, subtotal, tanggal) {
 }
 
 
-//tampilkan ringkasan
+
+
 function updateRingkasan() { 
     document.getElementById("ringkasanIdPenjualan").textContent = document.getElementById("idpenjualan").value || "-";
     document.getElementById("ringkasanIdPelanggan").textContent = document.getElementById("idpelanggan").value || "-";

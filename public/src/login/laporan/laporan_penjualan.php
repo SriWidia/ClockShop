@@ -77,7 +77,6 @@ $result = mysqli_query($conn, $sql);
         </form>
 
         <div id="laporan" class="mx-auto bg-white p-6 rounded-lg shadow-md">
-        <!-- <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-8">Laporan Penjualan</h2> -->
         <h2 class="text-lg font-semibold mt-2 text-center">Laporan Penjualan</h2> <br> 
             <table class="w-full border-collapse table-auto text-sm text-gray-600">
                 <thead>

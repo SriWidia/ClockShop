@@ -98,7 +98,6 @@ $totalKeluar = 0;
         <div id="laporan" class="mx-auto bg-white p-6 rounded-lg shadow-md"><br>
         
         <h2 class="text-lg font-semibold mt-2 text-center">Laporan Produk Masuk & Keluar</h2> <br> 
-        <!-- <h1 class="text-2xl font-bold mb-4 text-center">Laporan Produk Masuk & Keluar</h1> -->
         <h2 class="text-xl font-semibold mb-2">Produk Masuk</h2>
         <table id="tableMasuk" class="w-full border-collapse border border-gray-300 mb-6">
             <thead>
